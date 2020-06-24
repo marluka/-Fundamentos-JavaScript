@@ -24,3 +24,9 @@ var nombreCompleto = `${nombre} ${apellido.toUpperCase()}`
 
 /* obtener un substring */
 var str = nombre.substr(1, 2)
+
+/* RETO: mostrar la última letra de un nombre */
+
+function ultimaLetra(nombre){
+  return nombre.charAt(nombre.length-1);
+}
