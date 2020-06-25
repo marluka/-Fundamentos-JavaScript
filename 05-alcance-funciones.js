@@ -1,4 +1,4 @@
-var nombre = 'Marly'
+var nombre = 'Pepe'
 
 function imprimirNombreEnMayusculas(nombre) {
   nombre = nombre.toUpperCase()

@@ -1,9 +1,9 @@
 /* CLASE 3: Variables */
 
-var nombre = "Marly", apellido = "Mejia"
+var nombre = "Pepito", apellido = "Perez"
 var edad = 34
 
-edad = '34 años'
+edad = '28 años'
 
 console.log('Hola soy ' + nombre + ' ' + apellido)
 console.log('Tengo ' + edad)
