@@ -48,3 +48,15 @@ console.log(personAsaltas)
 var personasBajas = personas.filter(({ altura }) =>  altura < 1.8)
 
 console.log(personasBajas)
+
+
+/* CLASE 21: TRANSFORMAR UN ARRAY */
+
+const pasarAlturaACms = persona => ({
+  ...persona,
+  altura: persona.altura * 100  
+})
+
+var personasCms = personas.map(pasarAlturaACms)
+
+console.log(personasCms)
