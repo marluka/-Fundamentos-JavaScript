@@ -8,7 +8,7 @@ function Persona(nombre, apellido, altura) {
 
 /* Dentro del prototipo Persona, va a existir un atributo  
 "saludar" que será una función, sin parametros */
-Persona.prototype.saludar = function () {
+Persona.prototype.saludar = () => {
   console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`)
 }
 
@@ -20,6 +20,7 @@ Persona.prototype.medidas = function () {
   }
 }
 
+Persona.prototype.soyAlto = () => this.altura > 1.8
 
 var sacha = new Persona('Sacha', 'Lifszyc', 1.72)
 var erika = new Persona('Erika', 'Luna', 1.56)
