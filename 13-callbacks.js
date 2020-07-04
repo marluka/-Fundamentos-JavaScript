@@ -3,16 +3,28 @@ const API_URL = 'https://swapi.dev/api/'
 const PEOPLE_URL = 'people/:id'
 const options = { crossDomain: true }
 
-const onResponse = function(data){
-  console.log(`Hola, yo soy ${data.name}`)
-}
-
-function obtenerPersonaje(id){
+function obtenerPersonaje(id, callback){
   const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
-  $.get(url, options, onResponse)
-}
 
-/* Debido al asincrinosmo de js no sabemos en que orden nos van a llegar las respuestas */
-obtenerPersonaje(1)
-obtenerPersonaje(2)
-obtenerPersonaje(3)
+  $.get(url, options, function(data){
+    console.log(`Hola, yo soy ${data.name}`)
+    if (callback) {
+      callback()
+    }
+  })
+}
+/* para ganrantizar el orden de las respuestas 
+utilizamos callbacks*/
+
+obtenerPersonaje(1, function(){
+  obtenerPersonaje(2, function(){
+    obtenerPersonaje(3, function(){
+      obtenerPersonaje(4,function(){
+        obtenerPersonaje(5,function(){
+          obtenerPersonaje(6)
+        })
+      })
+    })
+  })
+})
+
