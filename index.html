@@ -30,6 +30,7 @@
       }
 
       inicializar() {
+        this.elegirColor = this.elegirColor.bind(this)
         btnEmpezar.classList.add('hide')
         this.nivel = 1
         this.colores = {
@@ -50,6 +51,7 @@
 
       siguienteNivel() {
         this.iluminarSecuencia()
+        this.agregareventosClick()
       }
 
       transformarNumeroAcolor(num) {
@@ -65,7 +67,8 @@
         }
       }
 
-      /* Se recomienda siempre el uso de let cuando se trata de estructuras for, 
+      /* 
+        Se recomienda siempre el uso de let cuando se trata de estructuras for, 
         ya que al usar var, el valor de dicha variable se va a remplazar cada vez 
         con la última asignación que se haga, mientras que con let, conservará su
         valor dentro de cada iteración.
@@ -87,11 +90,24 @@
         this.colores[color].classList.remove('light')
       }
 
+      agregareventosClick() {
+        this.colores.celeste.addEventListener('click', this.elegirColor)
+        this.colores.violeta.addEventListener('click', this.elegirColor)
+        this.colores.naranja.addEventListener('click', this.elegirColor)
+        this.colores.verde.addEventListener('click', this.elegirColor)
+      }
+
+      elegirColor(event) {
+        console.log(this)
+      }
+
     }
+
 
     function empezarJuego() {
       window.juego = new Juego()
     }
+
   </script>
 </body>
 </html>
