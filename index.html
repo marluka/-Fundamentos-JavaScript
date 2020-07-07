@@ -22,10 +22,11 @@
     const verde = document.getElementById('verde')
     const btnEmpezar = document.getElementById('btnEmpezar')
 
-    class Juego{
+    class Juego {
       constructor(){
         this.inicializar()
         this.generarSecuencia()
+        this.siguienteNivel()
       }
 
       inicializar() {
@@ -41,13 +42,54 @@
 
       /* El método fill() cambia todos los elementos en un arreglo por un valor estático,
          desde el índice start (por defecto 0) hasta el índice end (por defecto array.length). 
-         Devuelve el arreglo modificado. */
-      generarSecuencia(){
+         Devuelve el arreglo modificado. 
+      */
+      generarSecuencia() {
         this.secuencia =  new Array(10).fill(0).map(n => Math.floor(Math.random() * 4))
       }
+
+      siguienteNivel() {
+        this.iluminarSecuencia()
+      }
+
+      transformarNumeroAcolor(num) {
+        switch (num) {
+          case 0:
+            return 'celeste'
+          case 1:
+            return 'violeta'
+          case 2:
+            return 'naranja'
+          case 3:
+            return 'verde'
+        }
+      }
+
+      /* Se recomienda siempre el uso de let cuando se trata de estructuras for, 
+        ya que al usar var, el valor de dicha variable se va a remplazar cada vez 
+        con la última asignación que se haga, mientras que con let, conservará su
+        valor dentro de cada iteración.
+        Siempre que sea posible debemos usar const sobre let, y let sobre var 
+      */
+      iluminarSecuencia() {
+        for (let i = 0; i < this.nivel; i++) {
+          const color = this.transformarNumeroAcolor(this.secuencia[i])
+          setTimeout(() => this.iluminarColor(color), 1000*i)
+        }
+      }
+
+      iluminarColor(color) {
+        this.colores[color].classList.add('light')
+        setTimeout(() => this.apagarColor(color), 350)
+      }
+
+      apagarColor(color) {
+        this.colores[color].classList.remove('light')
+      }
+
     }
 
-    function empezarJuego(){
+    function empezarJuego() {
       window.juego = new Juego()
     }
   </script>
