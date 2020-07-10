@@ -27,38 +27,18 @@
 
     <script>
 
-      var sacha = {
-        nombre: 'Sacha',
-        apellido: 'Lifszyc',
-        edad: 28
+      function diasEntreFechas(inicio, fin) {
+        const unDia = 1000 * 60 * 60 * 24
+        const diferencia = Math.abs(fin - inicio)
+
+        return Math.floor(diferencia / unDia)
       }
 
-      function esMayorDeEdad(persona) {
+      // Los meses comienzan en 0
+      const hoy = new Date()
+      const nacimiento = new Date(1985, 11, 15)
 
-        let mensaje
-        const MAYORIA_DE_EDAD = 18
-
-        if (persona.edad >= MAYORIA_DE_EDAD) {
-          mensaje = 'Es mayor de edad'
-        } 
-        else {
-          mensaje = 'Es menor de edad'
-        }
-
-        console.log(mensaje)
-      }
-
-      // esMayorDeEdad(sacha)
-
-      /* let reduce el alcance de la variable al bloque donde se ha asignado. 
-        Si hay q reasignar las variables es mejor usar let y no var
-        y si no hay q reasignarlas, usar const */
-
-      for (let i = 0; i < 10; i++) {
-        console.log(i)
-      }
-
-      console.log(`Terminó el for, el valor de i es ${i}`)
+      console.log(diasEntreFechas(nacimiento,hoy))
       
     </script>
 
