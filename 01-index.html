@@ -61,6 +61,25 @@
         }
 
       }
+
+      /* closure: es una función que recuerda el estado de las variables 
+      al momento de ser invocada, y conserva este estado a través de 
+      reiteradas ejecuciones */
+
+      function crearSaludo(finalDeFrase) {
+        return function (nombre) {  
+          console.log(`Hola ${nombre} ${finalDeFrase}`)
+        }
+      }
+
+      const saludoArgentino = crearSaludo('che')
+      const saludoaMexicano = crearSaludo('güey')
+      const saludoColombiano = crearSaludo('parcero')
+
+      saludoArgentino('Sacha')
+      saludoaMexicano('Sacha')
+      saludoColombiano('Sacha')
+
     </script>
 
 
