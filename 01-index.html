@@ -26,19 +26,21 @@
     <script src="13-callbacks.js"></script> -->
 
     <script>
-
-      function diasEntreFechas(inicio, fin) {
-        const unDia = 1000 * 60 * 60 * 24
-        const diferencia = Math.abs(fin - inicio)
-
-        return Math.floor(diferencia / unDia)
+      /*
+        13  |_4___
+        13 - 4 = 9      1
+        9 - 4 = 5       1
+        5 - 4 = 1       1
+        1 - 4 = -3      0
+      */
+      function divisionEntera(dividendo, divisor) {
+        if (dividendo < divisor) {
+          return 0
+        } else {
+          return 1 + divisionEntera(dividendo - divisor, divisor)
+        }
       }
 
-      // Los meses comienzan en 0
-      const hoy = new Date()
-      const nacimiento = new Date(1985, 11, 15)
-
-      console.log(diasEntreFechas(nacimiento,hoy))
       
     </script>
 
