@@ -6,79 +6,83 @@
     <title>Ejemplos</title>
   </head>
   <body>
-    <!-- <script src="02-variables.js"></script> -->
-    <!-- <script src="03-numeros.js"></script> -->
-    <!-- <script src="04-funciones.js"></script>  -->
-    <!-- <script src="05-alcance-funciones.js"></script> -->
-    <!-- <script src="06-objetos.js"></script> -->
-    <!-- <script src="07-comparaciones.js"></script> -->
-    <!-- <script src="08-condicionales.js"></script> -->
-    <!-- <script src="09-loop-for.js"></script> -->
-    <!-- <script src="10-switch.js"></script> -->
-    <!-- <script src="11-arrays.js"></script> -->
-    <!-- <script src="12-prototipos.js"></script> -->
-
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-      crossorigin="anonymous"
-    ></script>
-    <script src="13-callbacks.js"></script> -->
 
     <script>
-      /*
-        13  |_4___
-        13 - 4 = 9      1
-        9 - 4 = 5       1
-        5 - 4 = 1       1
-        1 - 4 = -3      0
+
+      const pablo = {
+        nombre: 'Pablo',
+        apellido: 'Andrés'
+      }
+
+      const mariela = {
+        nombre: 'Mariela',
+        apellido: 'Riesnik'
+      }
+
+      function saludar() {
+        console.log(`Hola, mi nombre es ${this.nombre}`)
+      }
+
+      // Si ejecuto:
+
+      saludar()
+      // Hola, mi nombre es undefined
+
+      // Ya que tenemos la función definida dentro de un contexto global el 'this' en saludar() refiere al objeto 'window'. Por lo tanto es lo mismo que:
+
+      window.saludar()
+      // Hola, mi nombre es undefined
+
+      /* El método ‘.bind()’ se usa justamente para cambiar en contexto. 
+      bind() nos devuelve una nueva función atando el parámetro
       */
-      function divisionEntera(dividendo, divisor) {
-        if (dividendo < divisor) {
-          return 0
-        } else {
-          return 1 + divisionEntera(dividendo - divisor, divisor)
-        }
+
+      const saludarAPablo = saludar.bind(pablo)
+      const saludarAMariela = saludar.bind(mariela)
+
+      saludarAPablo()
+      // Hola, mi nombre es Pablo
+
+      saludarAMariela()
+      // Hola, mi nombre es Mariela
+
+      setTimeout( saludar.bind(pablo), 1000) == setTimeout(saludarAPablo, 1000)
+
+      function saludar(saludo = 'Hola') {
+        console.log(`${saludo}, mi nombre es ${this.nombre}`)
       }
+      
+      setTimeout( saludar.bind(pablo, 'Hola loco!'), 1000)
+      // Hola loco!, mi nombre es Pablo
 
-      function factorial(n) {
+      //también se puede agragar en la declaración de la constante.
+      const saludarApablo = saludar.bind(pablo, 'Hola loco!!')
+      // Hola loco!!, mi nombre es Pablo
 
-        if (!this.cache) {
-          this.cache = {}
-        }
-        // debugger
-        if (this.cache[n]) {
-          return this.cache[n]
-        }
+      /*  El primer parámetro es el contexto y luego van los siguientes 
+          parámetros en el orden en el que aparezcan.
+          IMPORTANTE!!!
+          La función .bind() no ejecuta la función a la que se agrega, 
+          sino que simplemente nos retorna una nueva función con ese contexto 
+          cambiado. 
+      */
 
-        if (n === 1) {
-          return 1
-        }
-        else {
-          this.cache[n] = n * factorial(n-1)
-          // debugger
-          return this.cache[n]
-        }
+      saludar.call(pablo)
+      // Hola, mi nombre es Pablo  -  se ejecuta inmediatamente
 
-      }
+      saludar.bind(pablo)
+      // no produce ningún resultado, nola ejecuta.
 
-      /* closure: es una función que recuerda el estado de las variables 
-      al momento de ser invocada, y conserva este estado a través de 
-      reiteradas ejecuciones */
+      saludar.call(pablo, 'Hola cheeee!!')
+      // Hola cheeee!!, mi nombre es Pablo
 
-      function crearSaludo(finalDeFrase) {
-        return function (nombre) {  
-          console.log(`Hola ${nombre} ${finalDeFrase}`)
-        }
-      }
+      /* Usando el método .apply, es similar a .call pero los parámetros 
+      adicionales se pasan como un arreglo de valores. */
+      saludar.apply(pablo, ['Hola mi querido'])
+      // Hola mi querido, mi nombre es Pablo
 
-      const saludoArgentino = crearSaludo('che')
-      const saludoaMexicano = crearSaludo('güey')
-      const saludoColombiano = crearSaludo('parcero')
 
-      saludoArgentino('Sacha')
-      saludoaMexicano('Sacha')
-      saludoColombiano('Sacha')
+
 
     </script>
 
